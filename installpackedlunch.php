@@ -1,4 +1,4 @@
-//Do not run this please
+
 <?php
 $servername = 'localhost';
 $username = 'root';
@@ -20,6 +20,7 @@ catch(PDOException $e)
 }
 
 include_once("connection.php");
+
 $stmt = $conn->prepare("DROP TABLE IF EXISTS userinfo;
 CREATE TABLE userinfo 
 (username VARCHAR(20) PRIMARY KEY,
@@ -39,10 +40,10 @@ main VARCHAR(20) NOT NULL,
 side VARCHAR(20) NOT NULL,
 drink VARCHAR(20) NOT NULL)");
 $stmt->execute();
-$stmt->closeCursor();
+$stmt ->closeCursor();*/
 
-$stmt = $conn->prepare("DROP TABLE IF EXISTS order;
-CREATE TABLE order 
+$stmt = $conn->prepare("DROP TABLE IF EXISTS userorder;
+CREATE TABLE userorder 
 (username VARCHAR(20),
 mealid INT(4),
 meal CHAR(1),
@@ -50,4 +51,6 @@ date DATE,
 PRIMARY KEY(username,meal,date))");
 $stmt->execute();
 $stmt->closeCursor();
+
+
 ?>
