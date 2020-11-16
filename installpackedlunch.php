@@ -21,8 +21,8 @@ catch(PDOException $e)
 
 include_once("connection.php");
 
-$stmt = $conn->prepare("DROP TABLE IF EXISTS userinfo;
-CREATE TABLE userinfo 
+$stmt = $conn->prepare("DROP TABLE IF EXISTS tbluserinfo;
+CREATE TABLE tbluserinfo 
 (username VARCHAR(20) PRIMARY KEY,
 surname VARCHAR(20) NOT NULL,
 forename VARCHAR(20) NOT NULL,
@@ -33,19 +33,20 @@ role TINYINT(1))");
 $stmt->execute();
 $stmt->closeCursor();
 
-$stmt = $conn->prepare("DROP TABLE IF EXISTS meal;
-CREATE TABLE meal 
-(mealid INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-main VARCHAR(20) NOT NULL,
-side VARCHAR(20) NOT NULL,
-drink VARCHAR(20) NOT NULL)");
+$stmt = $conn->prepare("DROP TABLE IF EXISTS tblfood;
+CREATE TABLE tblfood 
+(foodid INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+type VARCHAR(20) NOT NULL,
+foodname VARCHAR(20) NOT NULL,
+numberavailable INT(4) NOT NULL)");
 $stmt->execute();
-$stmt ->closeCursor();*/
+$stmt ->closeCursor();
 
-$stmt = $conn->prepare("DROP TABLE IF EXISTS userorder;
-CREATE TABLE userorder 
+$stmt = $conn->prepare("DROP TABLE IF EXISTS tbluserorder;
+CREATE TABLE tbluserorder 
 (username VARCHAR(20),
-mealid INT(4),
+mainid INT(4),
+sideid INT(4)
 meal CHAR(1),
 date DATE,
 PRIMARY KEY(username,meal,date))");
@@ -53,4 +54,9 @@ $stmt->execute();
 $stmt->closeCursor();
 
 
+$stmt = $conn->prepare("INSERT INTO tbluserinfo(username,surname,forename,password,house,year,role)VALUES 
+    ('admin.a','admin','admin','admin','staff',0,2)
+    ");
+$stmt->execute();
+$stmt->closeCursor();
 ?>
