@@ -1,37 +1,64 @@
-<?php 
-header('Location: users.php');
-try{
-    include_once("connection.php");
-    print_r($_POST);
-	//header('Location: users.php');
-	switch($_POST["role"]){
-		case "Pupil":
-			$role=0;
-			break;
-		case "Staff":
-			$role=1;
-			break;
-		case "Admin":
-			$role=2;
-			break;
-	}
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>User sign up</title>
+    
+</head>
+<body>
+<form action="addusertodatabase.php" method = "post">
+  Username:<input type="text" name="forename"><br>
+  First name:<input type="text" name="forename"><br>
+  Last name:<input type="text" name="surname"><br>
+  Password:<input type="password" name="password"><br>
+  <!--Creates a drop down list-->
+  House:<select name="house">
+		<option value="St. Anthony">St. Anthony</option>
+		<option value="Crosby">Crosby</option>
+		<option value="Fisher">Fisher</option>
+		<option value="Grafton">Grafton</option>
+		<option value="School">School</option>
+		<option value="Sidney">Sidney</option>
+		<option value="Bramston">Bramston</option>
+		<option value="Laundimer">Laundimer</option>
+		<option value="Laxton">Laxton</option>
+		<option value="Wyatt">Wyatt</option>
+		<option value="Kirkby">Kirkby</option>
+		<option value="New">New</option>
+		<option value="Sanderson">Sanderson</option>
+		<option value="Dryden">Dryden</option>
+		<option value="Berrystead">Berrystead</option>
+		<option value="Scott">Scott</option>
+		<option value="Laxton Junior">Laxton Junior</option>
+	</select>
+  <br>
+  Year:<select name="year">
+		<option value=1>First Form</option>
+		<option value=2>Second Form</option>
+		<option value=3>Third Form</option>
+		<option value=4>Fourth Form</option>
+		<option value=5>Fifth Form</option>
+		<option value=6>Lower Sixth</option>
+		<option value=7>Upper Sixth</option>
+	</select>
+  <br>
+  <input type="radio" name="role" value="Pupil" > Pupil<br>
+  <input type="radio" name="role" value="Teacher"> Teacher<br>
+  <input type="radio" name="role" value="Admin"> Admin<br>
+  <input type="submit" value="Add User">
+</form>
 
-	array_map("htmlspecialchars", $_POST);
-	$stmt = $conn->prepare("INSERT INTO TblUser (UserID,Gender,Surname,Forename,Password,House,Year ,Role)VALUES (null,:gender,:surname,:forename,:password,:house,:year,:role)");
-	$stmt->bindParam(':forename', $_POST['forename']);
-	$stmt->bindParam(':surname', $_POST['surname']);
-	$stmt->bindParam(':house', $_POST['house']);
-	$stmt->bindParam(':year', $_POST['year']);
-	$stmt->bindParam(':password', $_POST['passwd']);
-	$stmt->bindParam(':gender', $_POST['gender']);
-	$stmt->bindParam(':role', $role);
-	$stmt->execute();
-	$conn=null;
-
-
-catch(PDOException $e)
-	{
-		echo "error".$e->getMessage();
-	}
-$conn=null;
+<br>
+<?php
+include_once("connection.php");
+$stmt = $conn->prepare("SELECT * FROM tbluserinfo");
+$stmt->execute();
+/*
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+{
+  echo($row["forename"].' '.$row["surname"]." - ".$row["house"]."<br>");
+}
+*/
 ?>
+</body>
+</html>

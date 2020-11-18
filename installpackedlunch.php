@@ -36,7 +36,7 @@ $stmt->closeCursor();
 $stmt = $conn->prepare("DROP TABLE IF EXISTS tblfood;
 CREATE TABLE tblfood 
 (foodid INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-type VARCHAR(20) NOT NULL,
+type INT(1) NOT NULL,
 foodname VARCHAR(20) NOT NULL,
 numberavailable INT(4) NOT NULL)");
 $stmt->execute();
@@ -46,7 +46,8 @@ $stmt = $conn->prepare("DROP TABLE IF EXISTS tbluserorder;
 CREATE TABLE tbluserorder 
 (username VARCHAR(20),
 mainid INT(4),
-sideid INT(4)
+sideid INT(4),
+drinkid INT(4),
 meal CHAR(1),
 date DATE,
 PRIMARY KEY(username,meal,date))");
