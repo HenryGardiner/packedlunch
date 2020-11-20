@@ -7,7 +7,7 @@
 </head>
 <body>
 <form action="addusertodatabase.php" method = "post">
-  Username:<input type="text" name="forename"><br>
+  Username:<input type="text" name="username"><br>
   First name:<input type="text" name="forename"><br>
   Last name:<input type="text" name="surname"><br>
   Password:<input type="password" name="password"><br>
@@ -43,7 +43,7 @@
 	</select>
   <br>
   <input type="radio" name="role" value="Pupil" > Pupil<br>
-  <input type="radio" name="role" value="Teacher"> Teacher<br>
+  <input type="radio" name="role" value="Staff"> Staff<br>
   <input type="radio" name="role" value="Admin"> Admin<br>
   <input type="submit" value="Add User">
 </form>
