@@ -1,4 +1,7 @@
 <?php
+session_start(); 
+
+
 include_once ("connection.php");
 array_map("htmlspecialchars", $_POST);
 $stmt = $conn->prepare("SELECT * FROM tbluserinfo WHERE username =:username ;" );
@@ -7,6 +10,8 @@ $stmt->execute();
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 { 
     if($row['password']== $_POST['password']){
+        $_SESSION['srole']=$row['role'];
+        $_SESSION['suser']=$row['username'];
         if($row['role']== 2){
             header('Location: adminhome.php');
         }elseif($row['role']== 1){
@@ -18,5 +23,6 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
         header('Location: login.php');
     }
 }
+
 $conn=null;
 ?>

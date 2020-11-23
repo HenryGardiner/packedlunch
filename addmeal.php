@@ -1,3 +1,10 @@
+<?php
+session_start(); 
+if (!isset($_SESSION['suser']))
+{   
+    header("Location:login.php");
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +19,6 @@
 		<option value=0>Main</option>
 		<option value=1>Drink</option>
 		<option value=2>Snack</option>
-	</select><br>
-    Number available:<input type="text" name="numberavailable"><br>
   <input type="submit" value="Add food">
 </form>
 
@@ -25,7 +30,7 @@ $stmt->execute();
 
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 {
-  echo($row["foodname"].' '.$row["type"]." - Number available:".$row["numberavailable"]."<br>");
+  echo("<br>".$row["foodname"]." - Number available:".$row["numberavailable"]."<br>");
 }
 
 ?>
