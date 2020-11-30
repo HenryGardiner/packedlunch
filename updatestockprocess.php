@@ -1,12 +1,12 @@
 <?php 
-//header("Location: updatestock.php");
+header("Location: updatestock.php");
 include_once("connection.php");
-print_r($_POST);
+//print_r($_POST);
 try{
 	array_map("htmlspecialchars", $_POST);
-	$stmt = $conn->prepare("INSERT INTO tblfood ()VALUES (:userid,:subjectid)");
-	$stmt->bindParam(':subjectid', $_POST['subject']);
-	$stmt->bindParam(':userid', $_POST['student']);
+	$stmt = $conn->prepare("UPDATE tblfood SET numberavailable=:numav WHERE foodid=:id");
+	$stmt->bindParam(':numav', $_POST['numberavailable']);
+	$stmt->bindParam(':id', $_POST['foodid']);
 	$stmt->execute();
 	}
 catch(PDOException $e)

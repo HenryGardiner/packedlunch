@@ -1,8 +1,8 @@
 <?php 
 try{
     include_once("connection.php");
-    print_r($_POST);
-	//header('Location: users.php');
+    //print_r($_POST);
+	header('Location: users.php');
 	switch($_POST["role"]){
 		case "Pupil":
 			$role=0;
