@@ -41,23 +41,23 @@ foodname VARCHAR(40) NOT NULL,
 numberavailable INT(4) NOT NULL)");
 $stmt->execute();
 $stmt ->closeCursor();
-
+ 
 $stmt = $conn->prepare("DROP TABLE IF EXISTS tbluserorder;
 CREATE TABLE tbluserorder 
-(username VARCHAR(20),
+(orderid INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(20),
 mainid INT(4),
 sideid INT(4),
 drinkid INT(4),
 meal CHAR(1),
-date DATE,
-PRIMARY KEY(username,meal,date))");
+date DATE)");
 $stmt->execute();
 $stmt->closeCursor();
 
-
+ 
 $stmt = $conn->prepare("INSERT INTO tbluserinfo(username,surname,forename,password,house,year,role)VALUES 
-    ('admin.a','admin','admin','admin','staff',0,2)
+    ('admin.a','admin','admin','admin','Staff',0,2)
     ");
 $stmt->execute();
-$stmt->closeCursor();
+$stmt->closeCursor(); 
 ?>

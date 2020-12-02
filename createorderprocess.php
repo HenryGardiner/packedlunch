@@ -4,7 +4,7 @@ include_once("connection.php");
 //print_r($_POST);
 try{
     array_map("htmlspecialchars", $_POST);
-    $stmt = $conn->prepare("INSERT INTO tbluserorder (username,mainid,sideid,drinkid,meal,date)VALUES (:username,:mainid,:sideid,:drinkid,:meal,:date)");
+    $stmt = $conn->prepare("INSERT INTO tbluserorder (orderid,username,mainid,sideid,drinkid,meal,date)VALUES (NULL, :username,:mainid,:sideid,:drinkid,:meal,:date)");
     $stmt->bindParam(':username', $_POST['username']);
     $stmt->bindParam(':mainid', $_POST['mainid']);
     $stmt->bindParam(':sideid', $_POST['sideid']);

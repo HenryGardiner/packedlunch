@@ -1,13 +1,21 @@
 <?php
-require_once('connection.php');
+include_once('connection.php');
+$stmt = $conn->prepare("SELECT tu.house as hs, dk.foodname as drink, mn.foodname as main, sd.foodname as side, tu.username, date, meal 
+FROM tbluserorder
+INNER JOIN tblfood as dk ON dk.foodid = tbluserorder.drinkid
+INNER JOIN tblfood as mn ON mn.foodid = tbluserorder.mainid
+INNER JOIN tblfood as sd ON sd.foodid = tbluserorder.sideid
+INNER JOIN tbluserinfo as tu ON tu.username = tbluserorder.username");
+$stmt->execute();
+
  
-$sql = "SELECT username, forename, surname, house FROM tbluserinfo";
-$result = $conn->query($sql);
-$arr_users = [];
-if ($result->num_rows > 0) {
-    $arr_users = $result->fetch_all(MYSQLI_ASSOC);
-}
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+	{
+        print_r($row);
+		//echo($row['hs'].);
+	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

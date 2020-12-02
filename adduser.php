@@ -30,6 +30,7 @@
 		<option value="Berrystead">Berrystead</option>
 		<option value="Scott">Scott</option>
 		<option value="Laxton Junior">Laxton Junior</option>
+		<option value="Staff">Staff</option>
 	</select>
   <br>
   Year:<select name="year">
@@ -40,6 +41,7 @@
 		<option value=5>Fifth Form</option>
 		<option value=6>Lower Sixth</option>
 		<option value=7>Upper Sixth</option>
+		<option value=0>Staff</option>
 	</select>
   <br>
   <input type="radio" name="role" value="Pupil" > Pupil<br>
