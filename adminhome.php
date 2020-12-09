@@ -1,9 +1,11 @@
 <?php
 session_start(); 
-if (!isset($_SESSION['suser']))
+if (!isset($_SESSION['suser']) or ($_SESSION['srole']!=2))
 {   
     header("Location:login.php");
 }
+echo($_SESSION['srole']);
+echo($_SESSION['suser']);
 ?>
 <!DOCTYPE html>
 <html>

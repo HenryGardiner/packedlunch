@@ -1,12 +1,21 @@
 <?php
 include_once('connection.php');
-$stmt = $conn->prepare("SELECT tu.house as hs, dk.foodname as drink, mn.foodname as main, sd.foodname as side, tu.forename as fn, date, meal, orderid, tu.surname as sn
-FROM tbluserorder
+session_start(); 
+if (!isset($_SESSION['suser']))
+{   
+    header("Location:login.php");
+}
+//echo($_SESSION['srole']);
+//echo($_SESSION['suser']);
+
+//fetches data from table
+$stmt = $conn->prepare("SELECT tu.house as hs, dk.foodname as drink, mn.foodname as main, sd.foodname as side, tu.forename as fn, date, meal, orderid, tu.surname as sn, tu.username as username
+FROM tbluserorder 
 INNER JOIN tblfood as dk ON dk.foodid = tbluserorder.drinkid
 INNER JOIN tblfood as mn ON mn.foodid = tbluserorder.mainid
 INNER JOIN tblfood as sd ON sd.foodid = tbluserorder.sideid
 INNER JOIN tbluserinfo as tu ON tu.username = tbluserorder.username");
-$stmt->execute();
+$stmt->execute(); 
 ?>
 
 <!DOCTYPE html>
@@ -21,10 +30,11 @@ $stmt->execute();
 <body>
     <table id="ordertable">
         <thead>
+            <th>Username</th>
             <th>Date</th>
             <th>Name</th>
             <th>House</th>
-            <th>Meal Missed</th>`
+            <th>Meal Missed</th>
             <th>Main</th>
             <th>Drink</th>
             <th>Side</th>
@@ -32,11 +42,18 @@ $stmt->execute();
         </thead>
         <tbody>
             <?php
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-            {
-                print_r($row);
-                echo("<input type='hidden' order='".$row['orderid'].">");  //<td><input order='".$row['orderid']."'type='checkbox' value='1'></td>
-                echo("<tr><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td><td><input order='".$row['orderid']."'type='checkbox' value='1'></td></tr>");
+            if ($_SESSION['srole']=="0") {
+                echo("pupilrole");
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+                    {   
+                        if ($row['username']==$_SESSION['suser']){
+                            //print_r($row);
+                            //echo("<input type='hidden' order='".$row['orderid'].">");  //<td><input order='".$row['orderid']."'type='checkbox' value='1'></td>
+                            echo("<tr><td>".$row['username']."</td><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td><td><input order='".$row['orderid']."'type='checkbox' value='1'></td></tr>");
+                        }
+                    }
+            }else{
+                echo("<tr><td>".$row['username']."</td><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td><td><input order='".$row['orderid']."'type='checkbox' value='1'></td></tr>");
             }
             ?>
         </tbody>
@@ -49,4 +66,4 @@ $stmt->execute();
     });
     </script>
 </body>
-</html>
+</html> 
