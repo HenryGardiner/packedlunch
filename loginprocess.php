@@ -1,6 +1,9 @@
 <?php
 session_start(); 
-
+session_destroy();
+session_start();
+echo($_SESSION['srole']);
+echo($_SESSION['suser']);
 
 include_once ("connection.php");
 array_map("htmlspecialchars", $_POST);
@@ -9,7 +12,7 @@ $stmt->bindParam(':username', $_POST['username']);
 $stmt->execute();
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 { 
-    if($row['password']== $_POST['password']){
+    if($row['password']==$_POST['password']){
         $_SESSION['srole']=$row['role'];
         $_SESSION['suser']=$row['username'];
         if($row['role']== 2){
@@ -23,6 +26,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
         header('Location: login.php');
     }
 }
-
+if(empty($row) and !isset($_SESSION['suser'])){
+    header('Location: login.php');
+}
+//header("Location: login.php");
 $conn=null;
 ?>

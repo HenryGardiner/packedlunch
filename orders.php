@@ -5,6 +5,7 @@ if (!isset($_SESSION['suser']))
 {   
     header("Location:login.php");
 }
+
 //echo($_SESSION['srole']);
 //echo($_SESSION['suser']);
 
@@ -28,9 +29,23 @@ $stmt->execute();
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
 </head>
 <body>
+<br>
+<form action="logout.php" method="get">
+    <input type="submit" value="Log Out">
+</form>
+<br>
     <table id="ordertable">
         <thead>
-            <th>Username</th>
+        <?php 
+        if ($_SESSION['srole']=="0") {
+            //echo("pupilrole");
+            echo("<th>Username</th><th>Date</th><th>Name</th><th>House</th><th>Meal Missed</th><th>Main</th><th>Drink</th><th>Side</th>");
+        }else{
+            //echo("staffrole");
+            echo("<th>Username</th><th>Date</th><th>Name</th> <th>House</th><th>Meal Missed</th><th>Main</th><th>Drink</th><th>Side</th><th>Complete</th>");
+        }
+        ?>
+            <!-- <th>Username</th>
             <th>Date</th>
             <th>Name</th>
             <th>House</th>
@@ -38,22 +53,26 @@ $stmt->execute();
             <th>Main</th>
             <th>Drink</th>
             <th>Side</th>
-            <th>Complete</th>
+            <th>Complete</th>-->
         </thead>
         <tbody>
             <?php
             if ($_SESSION['srole']=="0") {
-                echo("pupilrole");
+                //echo("pupilrole");
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
                     {   
                         if ($row['username']==$_SESSION['suser']){
                             //print_r($row);
                             //echo("<input type='hidden' order='".$row['orderid'].">");  //<td><input order='".$row['orderid']."'type='checkbox' value='1'></td>
-                            echo("<tr><td>".$row['username']."</td><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td><td><input order='".$row['orderid']."'type='checkbox' value='1'></td></tr>");
+                            echo("<tr><td>".$row['username']."</td><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td></tr>");
                         }
                     }
             }else{
-                echo("<tr><td>".$row['username']."</td><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td><td><input order='".$row['orderid']."'type='checkbox' value='1'></td></tr>");
+                //echo("staffrole")
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+                {
+                    echo("<tr><td>".$row['username']."</td><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td><td><input order='".$row['orderid']."'type='checkbox' value='1'></td></tr>");
+                }
             }
             ?>
         </tbody>
