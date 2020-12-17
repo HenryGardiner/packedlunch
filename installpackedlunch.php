@@ -26,13 +26,13 @@ CREATE TABLE tbluserinfo
 (username VARCHAR(20) PRIMARY KEY,
 surname VARCHAR(20) NOT NULL,
 forename VARCHAR(20) NOT NULL,
-password VARCHAR(20) NOT NULL,
+password VARCHAR(60) NOT NULL,
 house VARCHAR(20) NOT NULL,
 year INT(2) NOT NULL,
 role TINYINT(1))");
 $stmt->execute();
 $stmt->closeCursor();
-
+/*
 $stmt = $conn->prepare("DROP TABLE IF EXISTS tblfood;
 CREATE TABLE tblfood 
 (foodid INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -53,11 +53,13 @@ meal CHAR(1),
 date DATE)");
 $stmt->execute();
 $stmt->closeCursor();
+*/
 
- 
+$adminpassword = password_hash('admin', PASSWORD_DEFAULT);
+
 $stmt = $conn->prepare("INSERT INTO tbluserinfo(username,surname,forename,password,house,year,role)VALUES 
-    ('admin.a','admin','admin','admin','Staff',0,2)
-    ");
+    ('admin.a','admin','admin', '$adminpassword' ,'Staff',0,2)");
 $stmt->execute();
 $stmt->closeCursor(); 
+
 ?>
