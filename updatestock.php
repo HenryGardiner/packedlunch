@@ -1,3 +1,20 @@
+<?php
+session_start(); 
+if (!isset($_SESSION['suser']) or ($_SESSION['srole']==0))
+{   
+    header("Location:login.php");
+}
+?>
+<br>
+<form action="logout.php" method="get">
+    <input type="submit" value="Log Out">
+</form>
+<br>
+<br>
+<form action="homebutton.php" method="get">
+    <input type="submit" value="Home">
+</form>
+<br>
 <form action="updatestockprocess.php" method = "post">
 	<select name = "foodid">
 	<?php

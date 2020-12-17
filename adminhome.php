@@ -1,11 +1,11 @@
 <?php
 session_start(); 
-if (!isset($_SESSION['suser']) or ($_SESSION['srole']!=2))
+if (!isset($_SESSION['suser']) or $_SESSION['srole']!=2)
 {   
     header("Location:login.php");
 }
-echo($_SESSION['srole']);
-echo($_SESSION['suser']);
+//echo($_SESSION['srole']);
+//echo($_SESSION['suser']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,6 +15,11 @@ echo($_SESSION['suser']);
     
 </head>
 <body>
+<br>
+<form action="logout.php" method="get">
+    <input type="submit" value="Log Out">
+</form>
+<br>
 <h1>Admin</h1>
 <form action="adduser.php" method="get">
     <input type="submit" value="Add a user">

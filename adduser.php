@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['suser']) or $_SESSION['srole']!=2)
+{   
+    header("Location:login.php");
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +13,17 @@
     
 </head>
 <body>
+<br>
+<form action="logout.php" method="get">
+    <input type="submit" value="Log Out">
+</form>
+<br>
+<br>
+<form action="homebutton.php" method="get">
+    <input type="submit" value="Home">
+</form>
+<br>
+
 <form action="addusertodatabase.php" method = "post">
   Username:<input type="text" name="username"><br>
   First name:<input type="text" name="forename"><br>

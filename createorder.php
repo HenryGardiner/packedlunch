@@ -1,16 +1,36 @@
+<?php
+session_start(); 
+if (!isset($_SESSION['suser']))
+{   
+    header("Location:login.php");
+}
+//echo($_SESSION['suser']);
+?>
 <!DOCTYPE html>
 <html>
 <body>
-
+<br>
+<form action="logout.php" method="get">
+    <input type="submit" value="Log Out">
+</form>
+<br>
+<br>
+<form action="homebutton.php" method="get">
+    <input type="submit" value="Home">
+</form>
+<br>
+<h1>Create an order!</h1>
 <form action="createorderprocess.php" method = "post">
 	<select name = "username">
 	<?php
 	include_once('connection.php');
-	$stmt = $conn->prepare("SELECT * FROM tbluserinfo WHERE role=0");
+	$stmt = $conn->prepare("SELECT * FROM tbluserinfo");
 	$stmt->execute();
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 	{
-		echo('<option value='.$row["username"].'>'.$row["forename"]." ".$row["surname"].'</option>');
+		if($row["username"]==$_SESSION['suser']){
+			echo('<option value='.$row["username"].'>'.$row["forename"]." ".$row["surname"].'</option>');
+		}
 	}
 	?>
 	</select>

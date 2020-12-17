@@ -1,6 +1,6 @@
 <?php
 session_start(); 
-if (!isset($_SESSION['suser']))
+if (!isset($_SESSION['suser']) or $_SESSION['srole']==0)
 {   
     header("Location:login.php");
 }
@@ -13,6 +13,17 @@ if (!isset($_SESSION['suser']))
     
 </head>
 <body>
+<br>
+<form action="logout.php" method="get">
+    <input type="submit" value="Log Out">
+</form>
+<br>
+<br>
+<form action="homebutton.php" method="get">
+    <input type="submit" value="Home">
+</form>
+<br>
+
 <form action="addmealprocess.php" method = "post">
   Name:<input type="text" name="foodname"><br>
   Type:<select name="type">

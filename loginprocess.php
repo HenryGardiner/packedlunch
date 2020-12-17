@@ -13,7 +13,6 @@ $stmt->bindParam(':username', $_POST['username']);
 $stmt->execute();
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 { 
-    
     $hash=$row['password'];
     $attempt=$_POST['password'];
     //echo($hash);
@@ -29,15 +28,15 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
             header('Location: pupilhome.php');
         }
     }else{
-        echo('incorrect password ');
-        //header('Location: login.php');
+        //echo('incorrect password ');
+        header('Location: login.php');
     }
 }
 if(empty($row) and !isset($_SESSION['suser'])){
-    echo('incorrect username ');
-    //header('Location: login.php');
+    //echo('incorrect username ');
+    header('Location: login.php');
 }
-//header("Location: login.php");
+
 
 $conn=null;
 ?>

@@ -34,6 +34,11 @@ $stmt->execute();
     <input type="submit" value="Log Out">
 </form>
 <br>
+<br>
+<form action="homebutton.php" method="get">
+    <input type="submit" value="Home">
+</form>
+<br>
     <table id="ordertable">
         <thead>
         <?php 
