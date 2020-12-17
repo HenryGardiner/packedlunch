@@ -25,29 +25,34 @@ $stmt->execute();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Datatable</title>
+    <title>Orders</title>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
 </head>
+
 <body>
+
 <br>
 <form action="logout.php" method="get">
     <input type="submit" value="Log Out">
 </form>
 <br>
+
 <br>
 <form action="homebutton.php" method="get">
     <input type="submit" value="Home">
 </form>
 <br>
+
+<form  action="updateorders.php" method="post">
     <table id="ordertable">
         <thead>
         <?php 
         if ($_SESSION['srole']=="0") {
             //echo("pupilrole");
-            echo("<th>Username</th><th>Date</th><th>Name</th><th>House</th><th>Meal Missed</th><th>Main</th><th>Drink</th><th>Side</th>");
+            echo("<th>Date</th><th>Name</th><th>House</th><th>Meal Missed</th><th>Main</th><th>Drink</th><th>Side</th>");
         }else{
             //echo("staffrole");
-            echo("<th>Username</th><th>Date</th><th>Name</th> <th>House</th><th>Meal Missed</th><th>Main</th><th>Drink</th><th>Side</th><th>Complete</th>");
+            echo("<th>Date</th><th>Name</th> <th>House</th><th>Meal Missed</th><th>Main</th><th>Drink</th><th>Side</th><th>Complete</th>");
         }
         ?>
             <!-- <th>Username</th>
@@ -69,19 +74,21 @@ $stmt->execute();
                         if ($row['username']==$_SESSION['suser']){
                             //print_r($row);
                             //echo("<input type='hidden' order='".$row['orderid'].">");  //<td><input order='".$row['orderid']."'type='checkbox' value='1'></td>
-                            echo("<tr><td>".$row['username']."</td><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td></tr>");
+                            echo("<tr><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td></tr>");
                         }
                     }
             }else{
                 //echo("staffrole")
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
                 {
-                    echo("<tr><td>".$row['username']."</td><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td><td><input order='".$row['orderid']."'type='checkbox' value='1'></td></tr>");
+                    echo("<tr><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td><td><input name='".$row['orderid']."'type='checkbox' value='1'></td></tr>");
                 }
             }
             ?>
         </tbody>
+        
     </table>
+    <input type="submit" value="Update Orders">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script>
@@ -89,5 +96,6 @@ $stmt->execute();
         $('#ordertable').DataTable();
     });
     </script>
+</form>
 </body>
 </html> 

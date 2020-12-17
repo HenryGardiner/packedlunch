@@ -24,7 +24,7 @@ if (!isset($_SESSION['suser']) or ($_SESSION['srole']!=0))
 <br>
 <h1>Pupil</h1>
 <form action="orders.php" method="get">
-    <input type="submit" value="View my orders">
+    <input type="submit" value="View my outstanding orders">
 </form>
 <br>
 <form action="createorder.php" method="get">
