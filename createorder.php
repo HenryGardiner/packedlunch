@@ -38,7 +38,7 @@ if (!isset($_SESSION['suser']))
     <select name = "mainid">
 	<?php
 	include_once('connection.php');
-	$stmt = $conn->prepare("SELECT * FROM tblfood WHERE type=0");
+	$stmt = $conn->prepare("SELECT * FROM tblfood WHERE type=0 AND numberavailable>0");
 	$stmt->execute();
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 	{
@@ -50,7 +50,7 @@ if (!isset($_SESSION['suser']))
     <select name = "sideid">
 	<?php
 	include_once('connection.php');
-	$stmt = $conn->prepare("SELECT * FROM tblfood WHERE type=2");
+	$stmt = $conn->prepare("SELECT * FROM tblfood WHERE type=2 AND numberavailable>0");
 	$stmt->execute();
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 	{
@@ -62,7 +62,7 @@ if (!isset($_SESSION['suser']))
     <select name = "drinkid">
 	<?php
 	include_once('connection.php');
-	$stmt = $conn->prepare("SELECT * FROM tblfood WHERE type=1");
+	$stmt = $conn->prepare("SELECT * FROM tblfood WHERE type=1 AND numberavailable>0");
 	$stmt->execute();
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 	{
