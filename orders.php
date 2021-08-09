@@ -71,11 +71,11 @@ $stmt->execute();
                 //echo("pupilrole");
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
                     {   
-                        if ($row['username']==$_SESSION['suser']){
+                        {
                             //print_r($row);
                             //echo("<input type='hidden' order='".$row['orderid'].">");  //<td><input order='".$row['orderid']."'type='checkbox' value='1'></td>
                             echo("<tr><td>".$row['date']."</td><td>".$row['fn']." ".$row['sn']."</td><td>".$row['hs']."</td><td>".$row['meal']."</td><td>".$row['main']."</td><td>".$row['drink']."</td><td>".$row['side']."</td></tr>");
-                        }
+                        }if ($row['username']==$_SESSION['suser'])
                     }
             }else{
                 //echo("staffrole")

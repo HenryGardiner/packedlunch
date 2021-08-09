@@ -5,7 +5,7 @@ try{
 	header('Location: adduser.php');
 	switch($_POST["role"]){
 		case "Pupil":
-			$role=0;
+			$role=2;
 			break;
 		case "Staff":
 			$role=1;
